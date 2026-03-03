@@ -28,19 +28,37 @@ public class Main {
         String answer = sc.nextLine();
         System.out.println("Ваш ответ:\t" + answer);
         int castleY = 1;
+
         Random random = new Random();
+
         int castleX = 1 + random.nextInt(sizeBoard);
         int monsterX = 1 + random.nextInt(sizeBoard);
+
+        String[][] board = new String[sizeBoard][sizeBoard];
+
+
         String leftBlock = " | ";
         String rightBlock = " |";
         String wall = " + —— + —— + —— + —— + —— + ";
-        for (int y = 1; y <= sizeBoard; y++) {
+
+
+        for (int y=1;y<=sizeBoard;y++)
+        {
+            for (int x=1;x<=sizeBoard;x++)
+            {
+                int count_monster = sizeBoard * sizeBoard - sizeBoard - 1;
+                for (int i = 0; i <= count_monster; i++) {
+                    board[random.nextInt(sizeBoard - 1)][random.nextInt(sizeBoard)] = monster;
+                }
+            }
+        }
+        /*        for (int y = 1; y <= sizeBoard; y++) {
             System.out.println(wall);
             for (int x = 1; x <= sizeBoard; x++) {
                 System.out.print(leftBlock);
                 if (personY == y && personX == x) {
                     System.out.print(person);
-                } else if (castleX == x && castleY == y) {
+                } else if (castleX == x && castleY == y) {                                //это старый фор для ввода через ифы без массивов
                     System.out.print(castle);
                 }else if (monsterX == x && monsterY == y) {
                         System.out.print(monster);
@@ -51,7 +69,9 @@ public class Main {
             System.out.println(rightBlock);
         }
         System.out.println(wall);
+*/
         while ((personLive > 0) && !(castleX == personX && castleY == personY)) {
+
             // логика хода
             //int personX = 1;
             //        int personY = 3;
@@ -134,5 +154,6 @@ public class Main {
 
 
 */
+        int[] massia = new int[10];
     }
 }
