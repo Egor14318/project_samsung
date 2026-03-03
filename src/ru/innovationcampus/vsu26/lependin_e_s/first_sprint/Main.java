@@ -60,7 +60,7 @@ public class Main {
         }
         System.out.println("Закончились жизни. Итог: ...");
 
-//
+
         //        if (answer.equals("ДА")) {
 
 //        System.out.println("Выбери сложность игры(от 1 до 5):");
