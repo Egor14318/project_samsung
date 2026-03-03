@@ -1,5 +1,6 @@
 package ru.innovationcampus.vsu26.lependin_e_s.first_sprint;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
@@ -11,29 +12,57 @@ public class Main {
          */
 
         String monster = "\uD83E\uDDDF\u200D";
-        int sizeBoard = 3;
+        int sizeBoard = 5;
         int personX = 1;
-        int personY = 3;
-
+        int personY = 5;
+        int monsterY = 2;
         int step = 0;
+
         // \n, \t - как спец символ(упомянуть)
-        String gamingField = "+ —— + —— + —— +\n"
-                + "|    |    | \uD83C\uDFE0 |\n"
-                + "+ —— + —— + —— +\n"
-                + "|    | " + monster + " |    |\n"
-                + "+ —— + —— + —— +\n"
-                + "| " + person + " |    |    |\n"
-                + "+ —— + —— + —— +";
+        String castle = "\uD83C\uDFF0";
+
+
 
         System.out.println("Привет! Ты готов начать играть в игру? (Напиши: ДА или НЕТ)");
 
         Scanner sc = new Scanner(System.in);
         String answer = sc.nextLine();
         System.out.println("Ваш ответ:\t" + answer);
+        int castleY = 1;
+        Random random = new Random();
+        int castleX = 1 + random.nextInt(sizeBoard);
+        int monsterX = 1 + random.nextInt(sizeBoard);
+        String leftBlock = " | ";
+        String rightBlock = " |";
+        String wall = " + —— + —— + —— + —— + —— + ";
+        for (int y = 1; y <= sizeBoard; y++) {
+            System.out.println(wall);
+            for (int x = 1; x <= sizeBoard; x++) {
+                System.out.print(leftBlock);
+                if (personY == y && personX == x) {
+                    System.out.print(person);
+                } else if (castleX == x && castleY == y) {
+                    System.out.print(castle);
+                }else if (monsterX == x && monsterY == y) {
+                        System.out.print(monster);
+                 }else {
+                    System.out.print("  ");
+                }
+            }
+            System.out.println(rightBlock);
+        }
+        System.out.println(wall);
+        while ((personLive > 0) && !(castleX == personX && castleY == personY)) {
+            // логика хода
+            //int personX = 1;
+            //        int personY = 3;
 
 
+        }
+        System.out.println("Закончились жизни. Итог: ...");
 
-//        if (answer.equals("ДА")) {
+
+        //        if (answer.equals("ДА")) {
 
 //        System.out.println("Выбери сложность игры(от 1 до 5):");
 //        int difficultGame = sc.nextInt();
@@ -68,7 +97,7 @@ public class Main {
 //            System.out.println("Данные введены неккоректно");
 //        }
 
-        switch (answer) {
+/*        switch (answer) {
             case "ДА" -> {
                 System.out.println("Выбери сложность игры(от 1 до 5):");
                 int difficultGame = sc.nextInt();
@@ -101,5 +130,10 @@ public class Main {
             default -> System.out.println("Данные введены неккоректно");
         }
 
+    }
+}
+
+
+*/
     }
 }
