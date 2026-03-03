@@ -22,7 +22,7 @@ public class Main {
         String castle = "\uD83C\uDFF0";
 
 
-
+//
         System.out.println("Привет! Ты готов начать играть в игру? (Напиши: ДА или НЕТ)");
 
         Scanner sc = new Scanner(System.in);
