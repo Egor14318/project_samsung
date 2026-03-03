@@ -40,16 +40,17 @@ public class Main {
         String leftBlock = " | ";
         String rightBlock = " |";
         String wall = " + —— + —— + —— + —— + —— + ";
-
+        int count_monster = sizeBoard * sizeBoard - sizeBoard - 1;
+        for (int i = 0; i <= count_monster; i++) {
+            board[random.nextInt(sizeBoard - 1)][random.nextInt(sizeBoard)] = monster;
+        }
+        
 
         for (int y=1;y<=sizeBoard;y++)
         {
             for (int x=1;x<=sizeBoard;x++)
             {
-                int count_monster = sizeBoard * sizeBoard - sizeBoard - 1;
-                for (int i = 0; i <= count_monster; i++) {
-                    board[random.nextInt(sizeBoard - 1)][random.nextInt(sizeBoard)] = monster;
-                }
+
             }
         }
         /*        for (int y = 1; y <= sizeBoard; y++) {
