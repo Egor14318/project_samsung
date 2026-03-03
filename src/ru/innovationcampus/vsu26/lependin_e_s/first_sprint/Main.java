@@ -44,7 +44,7 @@ public class Main {
         for (int i = 0; i <= count_monster; i++) {
             board[random.nextInt(sizeBoard - 1)][random.nextInt(sizeBoard)] = monster;
         }
-        
+
 
         for (int y=1;y<=sizeBoard;y++)
         {
