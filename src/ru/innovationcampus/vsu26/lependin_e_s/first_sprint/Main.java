@@ -21,7 +21,7 @@ public class Main {
         // \n, \t - как спец символ(упомянуть)
         String castle = "\uD83C\uDFF0";
 
-        
+
         System.out.println("Привет! Ты готов начать играть в игру? (Напиши: ДА или НЕТ)");
 
         Scanner sc = new Scanner(System.in);
