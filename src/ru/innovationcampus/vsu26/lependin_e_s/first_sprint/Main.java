@@ -77,6 +77,7 @@ public class Main {
                 personX = inputX;
                 personY = inputY;
                 step++;
+
                 board[inputY-1][inputX-1]=person;
 
                 System.out.println("Ход корректный; Новые координаты: " + personX + ", " + personY +
