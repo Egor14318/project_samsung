@@ -77,6 +77,8 @@ public class Main {
                 personX = inputX;
                 personY = inputY;
                 step++;
+                board[inputY-1][inputX-1]=person;
+
                 System.out.println("Ход корректный; Новые координаты: " + personX + ", " + personY +
                         "\\nХод номер: " + step);
             } else if (board[inputY - 1][inputX - 1].equals(castle)) {
@@ -84,8 +86,6 @@ public class Main {
                 break;
             } else {
                 System.out.println("Решите задачу.");
-            }
-            if (personLive < 0) {
                 Random r = new Random();
                 int x = r.nextInt(400);
                 int y = r.nextInt(400);
@@ -96,9 +96,27 @@ public class Main {
                 if (trueAnswer == ans) {
                     System.out.println("Верно! Ты победил монстра");
                     personLive++;
+                } else {
+                    System.out.println("Ты проиграл эту битву!");
+                    personLive -= 1;
                 }
-                System.out.println("Ты проиграл эту битву!");
-                break;
+
+            }
+            if (personLive <= 0) {
+                Random r = new Random();
+                int x = r.nextInt(400);
+                int y = r.nextInt(400);
+                int trueAnswer = x + y;
+                System.out.println("Реши пример: " + x + " + " + y + " = ?");
+                Scanner scx = new Scanner(System.in);
+                int ans = scx.nextInt();
+                if (trueAnswer == ans) {
+                    System.out.println("Верно! Ты победил монстра");
+                    personLive++;
+                } else {
+                    System.out.println("Ты проиграл эту битву!");
+                    break;
+                }
             }
 
 
