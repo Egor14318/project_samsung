@@ -4,13 +4,16 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
+
+
     public static void main(String[] args) {
+
         String person = "\uD83E\uDDD9\u200D";
         int personLive = 3;
         /* здесь необходимо рассказать про переполнение и про другие типы данных
             int personLive = 2147483649; // мало ли кто-то захочет сделать ооочень много жизней
          */
-//
+
         String monster = "\uD83E\uDDDF\u200D";
         int sizeBoard = 5;
         int personX = 1;
@@ -71,6 +74,23 @@ public class Main {
             System.out.println(wall);
             int inputX = sc.nextInt();
             int inputY = sc.nextInt();
+ /*            int counterr = 0;
+
+            if (inputX != personX && inputY != personY) {
+                System.out.println("Неккоректный ход");
+                counterr = 0;
+            } {
+                personX = inputX;
+                counterr = 1;
+                System.out.println("Ход корректный; Новые координаты: " + personX + ", " + personY);
+
+
+            } else {
+                System.out.println("Координаты не изменены");
+                counterr = 0;
+            }
+
+*/
 
             if (board[inputY - 1][inputX - 1].equals("  ")) {
                 board[personY - 1][personX - 1] = "  ";
@@ -78,7 +98,7 @@ public class Main {
                 personY = inputY;
                 step++;
 
-                board[inputY-1][inputX-1]=person;
+                board[inputY - 1][inputX - 1] = person;
 
                 System.out.println("Ход корректный; Новые координаты: " + personX + ", " + personY +
                         "\\nХод номер: " + step);
@@ -86,17 +106,16 @@ public class Main {
                 System.out.println("Вы прошли игру!");
                 break;
             } else {
-                System.out.println("Решите задачу.");
-                Random r = new Random();
-                int x = r.nextInt(400);
-                int y = r.nextInt(400);
-                int trueAnswer = x + y;
-                System.out.println("Реши пример: " + x + " + " + y + " = ?");
-                Scanner scx = new Scanner(System.in);
-                int ans = scx.nextInt();
-                if (trueAnswer == ans) {
+                boolean success = taskMonster();
+                if (success) {
                     System.out.println("Верно! Ты победил монстра");
                     personLive++;
+                    board[personY - 1][personX - 1] = "  ";
+                    personX = inputX;
+                    personY = inputY;
+                    board[personY - 1][personX - 1] = person;
+
+                    step++;
                 } else {
                     System.out.println("Ты проиграл эту битву!");
                     personLive -= 1;
@@ -128,9 +147,24 @@ public class Main {
 
         }
         System.out.println("Закончились жизни. Итог: ...");
-
-
     }
+    static boolean taskMonster() {
+        System.out.println("Решите задачу.");
+        Random r = new Random();
+        int x = r.nextInt(400);
+        int y = r.nextInt(400);
+        int trueAnswer = x + y;
+        System.out.println("Реши пример: " + x + " + " + y + " = ?");
+        Scanner scx = new Scanner(System.in);
+        int ans = scx.nextInt();
+        if (trueAnswer == ans) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
 }
 
 
