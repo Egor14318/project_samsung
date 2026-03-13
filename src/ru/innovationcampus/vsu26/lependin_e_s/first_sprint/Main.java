@@ -8,9 +8,6 @@ public class Main {
 
     public static void main(String[] args) {
 
-
-
-        Person person = new Person();
         //String person = "\uD83E\uDDD9\u200D";
         int personLive = 3;
         /* здесь необходимо рассказать про переполнение и про другие типы данных
@@ -23,6 +20,9 @@ public class Main {
         int personY = 5;
         int monsterY = 2;
         int step = 0;
+
+
+        Person person = new Person(sizeBoard);
 
         // \n, \t - как спец символ(упомянуть)
         String castle = "\uD83C\uDFF0";
@@ -39,11 +39,7 @@ public class Main {
         } else {
             person.x = n;
         }
-        Person(int sizeBoard) {
-            y = sizeBoard;
-            int n = r.nextInt(sizeBoard);
-            x = n == 0 ? 1 : n;
-        }
+
         System.out.println("Привет! Ты готов начать играть в игру? (Напиши: ДА или НЕТ)");
 
         Scanner sc = new Scanner(System.in);
@@ -76,7 +72,7 @@ public class Main {
         }
 
         board[castleY - 1][castleX - 1] = castle;
-        board[personY - 1][personX - 1] = person;
+        board[personY - 1][personX - 1] = person.image;
 
 
         while ((personLive > 0) && !(castleX == personX && castleY == personY)) {
@@ -91,8 +87,8 @@ public class Main {
                 System.out.println(rightBlock);
             }
             System.out.println(wall);
-            int inputX = sc.nextInt();
-            int inputY = sc.nextInt();
+            int x = sc.nextInt();
+            int y = sc.nextInt();
  /*            int counterr = 0;
 
             if (inputX != personX && inputY != personY) {
@@ -110,14 +106,68 @@ public class Main {
             }
 
 */
+            if (person.isMoveCorrect(x, y)) {
+                String next = board[y - 1][x - 1];
+                if (next.equals("  ")) {
+                    board[person.y - 1][person.x - 1] = "  ";
+                    person.move(x, y);
+                    step++;
+                    board[y - 1][x - 1] = person.image;
+                    System.out.println("Ход корректный; Новые координаты: " + person.x + ", " + person.y +
+                            "\\nХод номер: " + step);
+                } else if (next.equals(castle)) {
+                    System.out.println("Вы прошли игру!");
+                    break;
+                } else {
+      // задача и взаимодействие с монстрами
 
+                    boolean success = taskMonster();
+                    if (success) {
+                        System.out.println("Верно! Ты победил монстра");
+                        personLive++;
+                        board[personY - 1][personX - 1] = "  ";
+                        personX = x;
+                        personY = y;
+                        board[personY - 1][personX - 1] = person.image;
+
+                        step++;
+                    } else {
+                        System.out.println("Ты проиграл эту битву!");
+                        personLive -= 1;
+                    }
+
+
+                }
+            } else {
+                System.out.println("Некорректный ход");
+            }
+            if (personLive <= 0) {
+                /*int x = r.nextInt(400);
+                int y = r.nextInt(400);
+                int trueAnswer = x + y;
+                System.out.println("Реши пример: " + x + " + " + y + " = ?");
+                Scanner scx = new Scanner(System.in);
+                int ans = scx.nextInt();
+                if (trueAnswer == ans) {
+                    System.out.println("Верно! Ты победил монстра");
+                    personLive++;
+                } else {
+                    System.out.println("Ты проиграл эту битву!");
+                    break;
+                }*/
+            }
+
+
+
+            // старая версия проверки и переноса персонажа без класс а также обтаботка монстра
+            /*
             if (board[inputY - 1][inputX - 1].equals("  ")) {
                 board[personY - 1][personX - 1] = "  ";
                 personX = inputX;
                 personY = inputY;
                 step++;
 
-                board[inputY - 1][inputX - 1] = person;
+                board[inputY - 1][inputX - 1] = person.image;
 
                 System.out.println("Ход корректный; Новые координаты: " + personX + ", " + personY +
                         "\\nХод номер: " + step);
@@ -162,10 +212,12 @@ public class Main {
             //int personX = 1;
             //        int personY = 3;
 
-
+*/
         }
         System.out.println("Закончились жизни. Итог: ...");
+
     }
+
     static boolean taskMonster() {
         System.out.println("Решите задачу.");
         Random r = new Random();

@@ -1,11 +1,20 @@
 package ru.innovationcampus.vsu26.lependin_e_s.first_sprint;
 
+import java.util.Random;
+
 public class Person    //основной класс персонажа
 {
     int x;
     int y;
     String image = "\\\\uD83E\\\\uDDD9\\\\u200D";
     int live = 3;
+
+    Person(int sizeBoard) {
+        Random r = new Random();
+        y = sizeBoard;
+        int n = r.nextInt(sizeBoard);
+        x = n == 0 ? 1 : n;
+    }
 
     void move(int x, int y)  //метод перемещения персонажа
     {
