@@ -8,7 +8,10 @@ public class Main {
 
     public static void main(String[] args) {
 
-        String person = "\uD83E\uDDD9\u200D";
+
+
+        Person person = new Person();
+        //String person = "\uD83E\uDDD9\u200D";
         int personLive = 3;
         /* здесь необходимо рассказать про переполнение и про другие типы данных
             int personLive = 2147483649; // мало ли кто-то захочет сделать ооочень много жизней
@@ -25,6 +28,22 @@ public class Main {
         String castle = "\uD83C\uDFF0";
 
 
+        Random r = new Random();
+        int g = r.nextInt(sizeBoard);
+        person.x = g == 0 ? 1 : g;
+        person.y = sizeBoard;
+
+        int n = r.nextInt(sizeBoard);
+        if (n == 0) {
+            person.x = 1;
+        } else {
+            person.x = n;
+        }
+        Person(int sizeBoard) {
+            y = sizeBoard;
+            int n = r.nextInt(sizeBoard);
+            x = n == 0 ? 1 : n;
+        }
         System.out.println("Привет! Ты готов начать играть в игру? (Напиши: ДА или НЕТ)");
 
         Scanner sc = new Scanner(System.in);
@@ -123,7 +142,6 @@ public class Main {
 
             }
             if (personLive <= 0) {
-                Random r = new Random();
                 int x = r.nextInt(400);
                 int y = r.nextInt(400);
                 int trueAnswer = x + y;
