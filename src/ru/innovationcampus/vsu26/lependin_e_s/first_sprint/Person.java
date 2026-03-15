@@ -6,7 +6,7 @@ public class Person    //основной класс персонажа
 {
     int x;
     int y;
-    String image = "\\\\uD83E\\\\uDDD9\\\\u200D";
+    String imagee = "\uD83E\uDDD9\u200D♂\uFE0F";
     int live = 3;
 
     Person(int sizeBoard) {

@@ -72,7 +72,7 @@ public class Main {
         }
 
         board[castleY - 1][castleX - 1] = castle;
-        board[personY - 1][personX - 1] = person.image;
+        board[personY - 1][personX - 1] = person.imagee;
 
 
         while ((personLive > 0) && !(castleX == personX && castleY == personY)) {
@@ -112,7 +112,7 @@ public class Main {
                     board[person.y - 1][person.x - 1] = "  ";
                     person.move(x, y);
                     step++;
-                    board[y - 1][x - 1] = person.image;
+                    board[y - 1][x - 1] = person.imagee;
                     System.out.println("Ход корректный; Новые координаты: " + person.x + ", " + person.y +
                             "\\nХод номер: " + step);
                 } else if (next.equals(castle)) {
@@ -125,10 +125,11 @@ public class Main {
                     if (success) {
                         System.out.println("Верно! Ты победил монстра");
                         personLive++;
-                        board[personY - 1][personX - 1] = "  ";
+                        board[person.y - 1][person.x - 1] = "  ";
                         personX = x;
                         personY = y;
-                        board[personY - 1][personX - 1] = person.image;
+                        person.move(x, y);
+                        board[personY - 1][personX - 1] = person.imagee;
 
                         step++;
                     } else {
@@ -142,19 +143,11 @@ public class Main {
                 System.out.println("Некорректный ход");
             }
             if (personLive <= 0) {
-                /*int x = r.nextInt(400);
-                int y = r.nextInt(400);
-                int trueAnswer = x + y;
-                System.out.println("Реши пример: " + x + " + " + y + " = ?");
-                Scanner scx = new Scanner(System.in);
-                int ans = scx.nextInt();
-                if (trueAnswer == ans) {
-                    System.out.println("Верно! Ты победил монстра");
+                if (perlive_()) {
                     personLive++;
                 } else {
-                    System.out.println("Ты проиграл эту битву!");
                     break;
-                }*/
+                }
             }
 
 
@@ -217,7 +210,24 @@ public class Main {
         System.out.println("Закончились жизни. Итог: ...");
 
     }
+    static boolean perlive_(){
+        Random r = new Random();
+        int x = r.nextInt(400);
+        int y = r.nextInt(400);
+        int trueAnswer = x + y;
+        System.out.println("Реши пример: " + x + " + " + y + " = ?");
+        Scanner scx = new Scanner(System.in);
+        int ans = scx.nextInt();
+        if (trueAnswer == ans) {
+            System.out.println("Верно! Ты победил монстра");
+            return  true;
+        } else {
+            System.out.println("Ты проиграл эту битву!");
+            return false;
+        }
 
+
+    }
     static boolean taskMonster() {
         System.out.println("Решите задачу.");
         Random r = new Random();
