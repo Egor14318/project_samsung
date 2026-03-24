@@ -6,6 +6,8 @@ import java.util.Scanner;
 public class Main {
 
 
+
+
     public static void main(String[] args) {
 
         //String person = "\uD83E\uDDD9\u200D";
@@ -20,13 +22,13 @@ public class Main {
         int personY = 5;
         int monsterY = 2;
         int step = 0;
-
+        boolean finishh = false;
 
         Person person = new Person(sizeBoard);
 
         // \n, \t - как спец символ(упомянуть)
         String castle = "\uD83C\uDFF0";
-        String health = "❤\uFE0F";
+        String health = "❤️";
 
         Random r = new Random();
         int g = r.nextInt(sizeBoard);
@@ -70,10 +72,14 @@ public class Main {
         for (int i = 0; i <= count_monster; i++) {
             board[random.nextInt(sizeBoard - 1)][random.nextInt(sizeBoard)] = monster;
         }
+
+
         int health_ = 3;
         for (int i = 1; i <= health_; i++) {
             board[random.nextInt(sizeBoard - 1)][random.nextInt(sizeBoard)] = health;
         }
+
+
         board[castleY - 1][castleX - 1] = castle;
         board[personY - 1][personX - 1] = person.imagee;
 
@@ -121,6 +127,16 @@ public class Main {
                 } else if (next.equals(castle)) {
                     System.out.println("Вы прошли игру!");
                     break;
+                } else if (next.equals(health)) {
+                    board[person.y - 1][person.x - 1] = "  ";
+                    person.move(x, y);
+                    step++;
+                    board[y - 1][x - 1] = person.imagee;
+                    personLive++;
+                    System.out.println("вы получили доп жизнь теперь у вас " + personLive + " жизней");
+                    System.out.println("Ход корректный; Новые координаты: " + person.x + ", " + person.y +
+                            "\\nХод номер: " + step);
+
                 } else {
                     // задача и взаимодействие с монстрами
 
@@ -210,8 +226,9 @@ public class Main {
 
 */
         }
-        System.out.println("Закончились жизни. Итог: ...");
-
+        if (personLive==0) {
+            System.out.println("Закончились жизни. Итог: ..." + step + " ходов");
+        }
     }
 
     static boolean perlive_() {
@@ -219,6 +236,7 @@ public class Main {
         int x = r.nextInt(400);
         int y = r.nextInt(400);
         int trueAnswer = x + y;
+        System.out.println("последний шанс");
         System.out.println("Реши пример: " + x + " + " + y + " = ?");
         Scanner scx = new Scanner(System.in);
         int ans = scx.nextInt();
@@ -227,6 +245,7 @@ public class Main {
             return true;
         } else {
             System.out.println("Ты проиграл эту битву!");
+
             return false;
         }
 
@@ -242,11 +261,7 @@ public class Main {
         System.out.println("Реши пример: " + x + " + " + y + " = ?");
         Scanner scx = new Scanner(System.in);
         int ans = scx.nextInt();
-        if (trueAnswer == ans) {
-            return true;
-        } else {
-            return false;
-        }
+        return trueAnswer == ans;
     }
 
 
