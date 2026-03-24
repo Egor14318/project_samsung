@@ -26,7 +26,7 @@ public class Main {
 
         // \n, \t - как спец символ(упомянуть)
         String castle = "\uD83C\uDFF0";
-
+        String health = "❤\uFE0F";
 
         Random r = new Random();
         int g = r.nextInt(sizeBoard);
@@ -70,7 +70,10 @@ public class Main {
         for (int i = 0; i <= count_monster; i++) {
             board[random.nextInt(sizeBoard - 1)][random.nextInt(sizeBoard)] = monster;
         }
-
+        int health_ = 3;
+        for (int i = 1; i <= health_; i++) {
+            board[random.nextInt(sizeBoard - 1)][random.nextInt(sizeBoard)] = health;
+        }
         board[castleY - 1][castleX - 1] = castle;
         board[personY - 1][personX - 1] = person.imagee;
 
@@ -119,7 +122,7 @@ public class Main {
                     System.out.println("Вы прошли игру!");
                     break;
                 } else {
-      // задача и взаимодействие с монстрами
+                    // задача и взаимодействие с монстрами
 
                     boolean success = taskMonster();
                     if (success) {
@@ -210,7 +213,8 @@ public class Main {
         System.out.println("Закончились жизни. Итог: ...");
 
     }
-    static boolean perlive_(){
+
+    static boolean perlive_() {
         Random r = new Random();
         int x = r.nextInt(400);
         int y = r.nextInt(400);
@@ -220,7 +224,7 @@ public class Main {
         int ans = scx.nextInt();
         if (trueAnswer == ans) {
             System.out.println("Верно! Ты победил монстра");
-            return  true;
+            return true;
         } else {
             System.out.println("Ты проиграл эту битву!");
             return false;
@@ -228,6 +232,7 @@ public class Main {
 
 
     }
+
     static boolean taskMonster() {
         System.out.println("Решите задачу.");
         Random r = new Random();
@@ -276,7 +281,7 @@ public class Main {
 //        int difficultGame = sc.nextInt();
 //        System.out.println("Выбранная сложность:\t" + difficultGame);
 //            System.out.println("Сколько жизней будет у персонажа?");
-////            personLive = sc.nextInt(); // здесь необходимо рассказать о возможных ошибках(неверный тип, переполнение - еще раз и тд)
+/// /            personLive = sc.nextInt(); // здесь необходимо рассказать о возможных ошибках(неверный тип, переполнение - еще раз и тд)
 //            System.out.println(output_str);
 //            System.out.println("Live:\t" + personLive + "\n");
 //
