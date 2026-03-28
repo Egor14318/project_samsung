@@ -27,6 +27,8 @@ public class Person    //основной класс персонажа
         return this.x == x && Math.abs(this.y - y) == 1 || this.y == y && Math.abs(this.x - x) == 1;
     }
 
+
+
     void getDamage() {
         this.live -=1;
     }

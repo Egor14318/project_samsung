@@ -29,6 +29,7 @@ public class Main {
         // \n, \t - как спец символ(упомянуть)
         String castle = "\uD83C\uDFF0";
         String health = "❤️";
+        String enemy = "\uD83D\uDC80"; //это леший при встрече с ним у тебя просто пропадает одна жизнь
 
         Random r = new Random();
         int g = r.nextInt(sizeBoard);
@@ -78,7 +79,7 @@ public class Main {
         for (int i = 1; i <= health_; i++) {
             board[random.nextInt(sizeBoard - 1)][random.nextInt(sizeBoard)] = health;
         }
-
+        board[random.nextInt(sizeBoard - 1)][random.nextInt(sizeBoard)] = enemy;
 
         board[castleY - 1][castleX - 1] = castle;
         board[personY - 1][personX - 1] = person.imagee;
@@ -118,10 +119,14 @@ public class Main {
             if (person.isMoveCorrect(x, y)) {
                 String next = board[y - 1][x - 1];
                 if (next.equals("  ")) {
+                    if (step == 0){
+                        board[0][4]="  ";
+                    }
+                    step++;
                     board[person.y - 1][person.x - 1] = "  ";
                     person.move(x, y);
-                    step++;
                     board[y - 1][x - 1] = person.imagee;
+
                     System.out.println("Ход корректный; Новые координаты: " + person.x + ", " + person.y +
                             "\\nХод номер: " + step);
                 } else if (next.equals(castle)) {
@@ -136,6 +141,12 @@ public class Main {
                     System.out.println("вы получили доп жизнь теперь у вас " + personLive + " жизней");
                     System.out.println("Ход корректный; Новые координаты: " + person.x + ", " + person.y +
                             "\\nХод номер: " + step);
+
+                } else if (next.equals(enemy)) {
+                    personLive--;
+                    System.out.println("вы встретили лешего он отобрал у вас 1 здоровье теперь у вас " + personLive + " жизней");
+                    board[y - 1][x - 1] = "  ";
+
 
                 } else {
                     // задача и взаимодействие с монстрами
@@ -154,6 +165,7 @@ public class Main {
                     } else {
                         System.out.println("Ты проиграл эту битву!");
                         personLive -= 1;
+                        person.live-=1;
                     }
 
 
@@ -164,10 +176,18 @@ public class Main {
             if (personLive <= 0) {
                 if (perlive_()) {
                     personLive++;
+                    System.out.println("Верно! Ты победил монстра");
+                    personLive++;
+                    board[person.y - 1][person.x - 1] = "  ";
+                    personX = x;
+                    personY = y;
+                    person.move(x, y);
+                    board[personY - 1][personX - 1] = person.imagee;
                 } else {
                     break;
                 }
             }
+
 
 
 //
@@ -243,6 +263,7 @@ public class Main {
         if (trueAnswer == ans) {
             System.out.println("Верно! Ты победил монстра");
             return true;
+
         } else {
             System.out.println("Ты проиграл эту битву!");
 
